@@ -1,0 +1,23 @@
+<processor name="basic_minimal" buffersize="5">
+	<interconnect>
+		<name>interconnect</name>
+		<implementation>interconnect_trivial</implementation>
+		<size>2</size>
+	</interconnect>
+	
+	<unit>
+		<number>0</number>
+		<name>cu</name>
+		<type>cu</type><implementation>control_hardware</implementation>
+		<!-- Comma-separate list of unit numbers and buffers
+		     to send sync markers to when program is done.
+		     FORMAT: {unit, buffer}
+		     Disable like this:
+		       <parameter><key>SYNC_TO</key><value>{0,0}</value></parameter>
+		     -->
+		<parameter><key>SYNC_TO</key><value>{0,0}</value></parameter>
+	</unit>
+	
+	<unit><name>rob</name><type>rob</type><implementation>reorder</implementation><number>1</number></unit>
+</processor>
+

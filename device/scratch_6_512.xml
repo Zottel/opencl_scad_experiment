@@ -1,0 +1,48 @@
+<processor name="scratch_6_512" buffersize="5">
+	<interconnect>
+		<name>interconnect</name> <size>10</size>
+		<implementation>interconnect_trivial</implementation>
+	</interconnect>
+	
+	<unit>
+		<name>cu</name><number>0</number>
+		<type>cu</type><implementation>control_hardware</implementation>
+		<!-- Comma-separate list of unit numbers and buffers
+		     to send sync markers to when program is done.
+		     FORMAT: {unit, buffer}
+		     Disable like this:
+		       <parameter><key>SYNC_TO</key><value>{0,0}</value></parameter>
+		     -->
+		<parameter><key>SYNC_TO</key>
+		           <value>{1,2},{0,0}</value></parameter>
+	</unit>
+	
+	<unit><name>lsu</name><number>1</number>
+	      <type>lsu</type><implementation>lsu</implementation> </unit>
+	
+	<unit><name>scratch</name><number>2</number>
+	      <type>lsu</type><implementation>lsu_scratch</implementation>
+	      <parameter><key>MEMORY_SIZE</key><value>512</value>
+	                                       <!--512*scad_data--></parameter></unit>
+	<unit><name>rob</name><number>3</number>
+	      <type>rob</type><implementation>reorder</implementation> </unit>
+	
+	<unit><name>pu0</name><number>4</number>
+	      <type>pu</type><implementation>processing_basic</implementation></unit>
+	
+	<unit><name>pu1</name><number>5</number>
+	      <type>pu</type><implementation>processing_basic</implementation></unit>
+	
+	<unit><name>pu2</name><number>6</number>
+	      <type>pu</type><implementation>processing_basic</implementation></unit>
+	
+	<unit><name>pu3</name><number>7</number>
+	      <type>pu</type><implementation>processing_basic</implementation></unit>
+	
+	<unit><name>pu4</name><number>8</number>
+	      <type>pu</type><implementation>processing_basic</implementation></unit>
+	
+	<unit><name>pu5</name><number>9</number>
+	      <type>pu</type><implementation>processing_basic</implementation></unit>
+</processor>
+

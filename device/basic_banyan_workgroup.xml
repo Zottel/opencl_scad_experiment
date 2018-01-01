@@ -1,0 +1,39 @@
+<processor name="basic_banyan_workgroup" buffersize="5">
+	<interconnect>
+		<name>interconnect</name>
+		<implementation>interconnect_banyan_workgroup</implementation>
+		<size>16</size>
+	</interconnect>
+	
+	<unit>
+		<number>0</number>
+		<name>cu</name>
+		<type>cu</type><implementation>control</implementation>
+		<!-- Comma-separate list of unit numbers and buffers
+		     to send sync markers to when program is done.
+		     FORMAT: {unit, buffer}
+		     Disable like this:
+		       <parameter><key>SYNC_TO</key><value>{0,0}</value></parameter>
+		     -->
+		<parameter><key>SYNC_TO</key><value>{1,2},{2,2},{3,2},{0,0}</value></parameter>
+	</unit>
+
+	<unit>
+		<name>lsu</name><type>lsu</type>
+		<implementation>lsu_scratch</implementation>
+		<number>1</number>
+		<parameter><key>MEMORY_SIZE</key><value>512</value><!--512*scad_data--></parameter>
+	</unit>
+	<unit><name>lsu_input</name><type>lsu</type><implementation>lsu_input</implementation><number>2</number></unit>
+	<unit><name>lsu_output</name><type>lsu</type><implementation>lsu_output</implementation><number>3</number></unit>
+	<unit><name>rob</name><type>rob</type><implementation>reorder</implementation><number>4</number></unit>
+	
+	<unit><name>pu0</name><type>pu</type><implementation>processing_basic</implementation><number>5</number></unit>
+	<unit><name>pu1</name><type>pu</type><implementation>processing_basic</implementation><number>6</number></unit>
+	<unit><name>pu2</name><type>pu</type><implementation>processing_basic</implementation><number>7</number></unit>
+	<unit><name>pu3</name><type>pu</type><implementation>processing_basic</implementation><number>8</number></unit>
+	<unit><name>pu4</name><type>pu</type><implementation>processing_basic</implementation><number>9</number></unit>
+	<unit><name>pu5</name><type>pu</type><implementation>processing_basic</implementation><number>10</number></unit>
+	<unit><name>pu6</name><type>pu</type><implementation>processing_basic</implementation><number>11</number></unit>
+	<unit><name>pu7</name><type>pu</type><implementation>processing_basic</implementation><number>12</number></unit>
+</processor>
